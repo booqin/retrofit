@@ -54,6 +54,7 @@ class Platform {
 
   CallAdapter.Factory defaultCallAdapterFactory(@Nullable Executor callbackExecutor) {
     if (callbackExecutor != null) {
+      //存在自定义的Executor
       return new ExecutorCallAdapterFactory(callbackExecutor);
     }
     return DefaultCallAdapterFactory.INSTANCE;

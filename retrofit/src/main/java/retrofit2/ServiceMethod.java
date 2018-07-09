@@ -114,6 +114,7 @@ final class ServiceMethod<R, T> {
   }
 
   T adapt(Call<R> call) {
+    //通过Retrofit设置Adapter，如果未设置，会执行DefaultCallAdapterFactory，执行adapt时直接返回call
     return callAdapter.adapt(call);
   }
 

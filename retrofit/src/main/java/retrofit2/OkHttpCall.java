@@ -182,7 +182,7 @@ final class OkHttpCall<T> implements Call<T> {
   }
 
   private okhttp3.Call createRawCall() throws IOException {
-    okhttp3.Call call = serviceMethod.toCall(args);
+    okhttp3.Call call = serviceMethod.toCall(args); //生成请求
     if (call == null) {
       throw new NullPointerException("Call.Factory returned null.");
     }
@@ -215,7 +215,7 @@ final class OkHttpCall<T> implements Call<T> {
 
     ExceptionCatchingRequestBody catchingBody = new ExceptionCatchingRequestBody(rawBody);
     try {
-      T body = serviceMethod.toResponse(catchingBody);
+      T body = serviceMethod.toResponse(catchingBody); //获取请求结果
       return Response.success(body, rawResponse);
     } catch (RuntimeException e) {
       // If the underlying source threw an exception, propagate that rather than indicating it was

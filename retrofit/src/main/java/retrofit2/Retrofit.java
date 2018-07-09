@@ -126,7 +126,7 @@ public final class Retrofit {
    */
   @SuppressWarnings("unchecked") // Single-interface proxy creation guarded by parameter safety.
   public <T> T create(final Class<T> service) {
-    Utils.validateServiceInterface(service);
+    Utils.validateServiceInterface(service);  //验证接口的可用性。1.service必须是interface; 2.service不能继承其它接口
     if (validateEagerly) {
       eagerlyValidateMethods(service);
     }
@@ -143,6 +143,7 @@ public final class Retrofit {
             if (platform.isDefaultMethod(method)) {
               return platform.invokeDefaultMethod(method, service, proxy, args);
             }
+            //api相关的接口调用实现
             ServiceMethod<Object, Object> serviceMethod =
                 (ServiceMethod<Object, Object>) loadServiceMethod(method);
             OkHttpCall<Object> okHttpCall = new OkHttpCall<>(serviceMethod, args);
@@ -407,7 +408,7 @@ public final class Retrofit {
     public Builder() {
       this(Platform.get());
     }
-
+    //newBuilder时调用
     Builder(Retrofit retrofit) {
       platform = Platform.get();
       callFactory = retrofit.callFactory;
