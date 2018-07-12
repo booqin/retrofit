@@ -105,7 +105,7 @@ final class ServiceMethod<R, T> {
       throw new IllegalArgumentException("Argument count (" + argumentCount
           + ") doesn't match expected count (" + handlers.length + ")");
     }
-
+    //参数的拼接
     for (int p = 0; p < argumentCount; p++) {
       handlers[p].apply(requestBuilder, args[p]);
     }
@@ -225,6 +225,7 @@ final class ServiceMethod<R, T> {
     }
 
     private CallAdapter<T, R> createCallAdapter() {
+      //获取返回类型
       Type returnType = method.getGenericReturnType();
       if (Utils.hasUnresolvableType(returnType)) {
         throw methodError(

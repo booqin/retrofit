@@ -143,7 +143,7 @@ public final class Retrofit {
             if (platform.isDefaultMethod(method)) {
               return platform.invokeDefaultMethod(method, service, proxy, args);
             }
-            //api相关的接口调用实现
+            //api相关的接口调用实现 泛型为Object---><T, R>
             ServiceMethod<Object, Object> serviceMethod =
                 (ServiceMethod<Object, Object>) loadServiceMethod(method);
             OkHttpCall<Object> okHttpCall = new OkHttpCall<>(serviceMethod, args);
@@ -218,6 +218,7 @@ public final class Retrofit {
     checkNotNull(annotations, "annotations == null");
 
     int start = callAdapterFactories.indexOf(skipPast) + 1;
+    //根据factory获取对于的adapter
     for (int i = start, count = callAdapterFactories.size(); i < count; i++) {
       CallAdapter<?, ?> adapter = callAdapterFactories.get(i).get(returnType, annotations, this);
       if (adapter != null) {

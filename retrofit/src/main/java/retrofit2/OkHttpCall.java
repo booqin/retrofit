@@ -78,6 +78,7 @@ final class OkHttpCall<T> implements Call<T> {
     }
   }
 
+  //网络请求队列
   @Override public void enqueue(final Callback<T> callback) {
     checkNotNull(callback, "callback == null");
 
@@ -113,6 +114,7 @@ final class OkHttpCall<T> implements Call<T> {
       @Override public void onResponse(okhttp3.Call call, okhttp3.Response rawResponse) {
         Response<T> response;
         try {
+          //将源Resp转换为目标Resp
           response = parseResponse(rawResponse);
         } catch (Throwable e) {
           throwIfFatal(e);

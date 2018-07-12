@@ -56,9 +56,10 @@ final class CallEnqueueObservable<T> extends Observable<Response<T>> {
 
       try {
         observer.onNext(response);
-
+        //未取消
         if (!disposed) {
           terminated = true;
+          //发送complete
           observer.onComplete();
         }
       } catch (Throwable t) {

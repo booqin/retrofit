@@ -312,14 +312,14 @@ final class Utils {
   }
 
   static Type getParameterUpperBound(int index, ParameterizedType type) {
-    Type[] types = type.getActualTypeArguments();
+    Type[] types = type.getActualTypeArguments(); //获取泛型List<T>中的T
     if (index < 0 || index >= types.length) {
       throw new IllegalArgumentException(
           "Index " + index + " not in range [0," + types.length + ") for " + type);
     }
     Type paramType = types[index];
     if (paramType instanceof WildcardType) {
-      return ((WildcardType) paramType).getUpperBounds()[0];
+      return ((WildcardType) paramType).getUpperBounds()[0];  //通配符上的extends类型
     }
     return paramType;
   }
