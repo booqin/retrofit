@@ -319,7 +319,7 @@ final class Utils {
     }
     Type paramType = types[index];
     if (paramType instanceof WildcardType) {
-      return ((WildcardType) paramType).getUpperBounds()[0];  //通配符上的extends类型
+      return ((WildcardType) paramType).getUpperBounds()[0];  //通配符上的extends类型，上边界值
     }
     return paramType;
   }

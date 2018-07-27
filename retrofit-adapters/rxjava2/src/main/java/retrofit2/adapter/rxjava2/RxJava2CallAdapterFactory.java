@@ -119,6 +119,7 @@ public final class RxJava2CallAdapterFactory extends CallAdapter.Factory {
           + " as " + name + "<Foo> or " + name + "<? extends Foo>");
     }
 
+    //获取observable中的泛型类型，边界值
     Type observableType = getParameterUpperBound(0, (ParameterizedType) returnType);
     Class<?> rawObservableType = getRawType(observableType);
     if (rawObservableType == Response.class) {
