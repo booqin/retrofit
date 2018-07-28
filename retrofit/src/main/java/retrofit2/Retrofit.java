@@ -155,7 +155,7 @@ public final class Retrofit {
   private void eagerlyValidateMethods(Class<?> service) {
     Platform platform = Platform.get();
     for (Method method : service.getDeclaredMethods()) {
-      if (!platform.isDefaultMethod(method)) {
+      if (!platform.isDefaultMethod(method)) { //android 环境下isDefault为false
         loadServiceMethod(method);
       }
     }

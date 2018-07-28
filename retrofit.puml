@@ -1,0 +1,33 @@
+@startuml
+
+Retrofit -> Api: create
+
+activate Retrofit
+
+Retrofit -> ServiceMethod:adapt
+
+ServiceMethod -> CallAdapter:adapt
+
+Retrofit <-- CallAdapter:okHttpCall
+
+deactivate Retrofit
+
+activate Api
+
+Api -> OkHttpCall:execute
+
+OkHttpCall -> ServiceMethod:toCall
+
+ServiceMethod -> okhttp3.Call: newCall
+
+OkHttpCall ->> okhttp3.Call: execute
+
+OkHttpCall <<-- okhttp3.Call:rawResponse
+
+OkHttpCall -> ServiceMethod:toResponse
+
+ServiceMethod -> Converter:convert
+
+deactivate Api
+
+@enduml
