@@ -2,19 +2,25 @@
 
 Retrofit -> Api: create
 
-activate Retrofit
 
-Retrofit -> ServiceMethod:adapt
-
-ServiceMethod -> CallAdapter:adapt
-
-Retrofit <-- CallAdapter:okHttpCall
-
-deactivate Retrofit
 
 activate Api
 
-Api -> OkHttpCall:execute
+Api -> ServiceMethod:adapt
+
+ServiceMethod -> Converter:convert
+
+ServiceMethod <-- Converter
+
+ServiceMethod -> CallAdapter:adapt
+
+Api <-- CallAdapter:okHttpCall
+
+Api -> CallAdapter
+
+CallAdapter -> OkHttpCall:execute
+
+activate OkHttpCall
 
 OkHttpCall -> ServiceMethod:toCall
 
@@ -27,6 +33,8 @@ OkHttpCall <<-- okhttp3.Call:rawResponse
 OkHttpCall -> ServiceMethod:toResponse
 
 ServiceMethod -> Converter:convert
+
+deactivate OkHttpCall
 
 deactivate Api
 
